@@ -1,0 +1,39 @@
+<?php
+require_once"Library/MyLib.php";
+$user=$_REQUEST["T1"];
+$password=$_REQUEST["T2"];
+$role=check_login($user,$password);
+if($role=="nothing")
+{
+	header("Location:LoginError.php");
+	die();
+}
+else
+{
+	session_start();
+	$_SESSION["role"]=$role;
+	$_SESSION["email"]=$user;
+	if($role=="user")
+	{
+		header("Location:student/home.php");
+		die();
+	}
+	if($role=="employee")
+	{
+	    
+    	header("Location:employee/home.php");
+		die();
+	
+	}
+	if($role=="admin")
+	{
+		header("Location:admin/home.php");
+		die();
+	}
+	if($role=="teacher")
+	{
+		header("Location:teacher/home.php");
+		die();
+	}
+}
+?>
